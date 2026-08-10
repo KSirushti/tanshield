@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TanShield — Target- and Severity-Aware Tanglish Moderation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="brand-mark"></span>TanShield</div>
+    <ul>
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#flow">How we'll build it</a></li>
+      <li><a href="#categories">Framework</a></li>
+      <li><a href="#deliverables">Deliverables</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Prototype — Round 1 Submission</div>
+    <h1>Toxicity detection that reads Tanglish like a <em>native speaker</em>, not a translator.</h1>
+    <p class="hero-sub">TanShield scores Tamil-English code-mixed text along two independent dimensions — who it targets, and how severe it is — instead of forcing every message into one flat offensive/not-offensive label.</p>
+
+    <div class="demo-stack" id="demo">
+
+      <div class="demo-card">
+        <div class="demo-label"><span>Example 1 · caste-based threat</span><span class="badge">static preview</span></div>
+        <div class="annotated-text">
+          <span class="tok flag-2">Unoda</span> <span class="tok flag-2">jaathi</span> <span class="tok flag-0">una</span> <span class="tok flag-2">yenga</span> <span class="tok flag-2">kapathuthu</span> <span class="tok flag-0">nu</span> <span class="tok flag-0">papom</span>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Target</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">None</span><div class="sev-track"><div class="sev-fill" style="width:4%; background:var(--sage);"></div></div><span class="sev-pct">4%</span></div>
+            <div class="sev-row"><span class="sev-name">Individual</span><div class="sev-track"><div class="sev-fill" style="width:18%; background:var(--ochre);"></div></div><span class="sev-pct">18%</span></div>
+            <div class="sev-row"><span class="sev-name">Group / caste / region</span><div class="sev-track"><div class="sev-fill" style="width:78%; background:var(--rose);"></div></div><span class="sev-pct">78%</span></div>
+          </div>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Severity</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">Mild</span><div class="sev-track"><div class="sev-fill" style="width:2%; background:var(--sage);"></div></div><span class="sev-pct">2%</span></div>
+            <div class="sev-row"><span class="sev-name">Moderate</span><div class="sev-track"><div class="sev-fill" style="width:10%; background:var(--ochre);"></div></div><span class="sev-pct">10%</span></div>
+            <div class="sev-row"><span class="sev-name">Severe</span><div class="sev-track"><div class="sev-fill" style="width:88%; background:var(--rose);"></div></div><span class="sev-pct">88%</span></div>
+          </div>
+        </div>
+        <div class="verdict-line">High severity, group-targeted — caste identity invoked as intimidation ("let's see who protects you"), not commentary.</div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-label"><span>Example 2 · friend checking in, rough language</span><span class="badge">static preview</span></div>
+        <div class="annotated-text">
+          <span class="tok flag-0">Macha</span> <span class="tok flag-3">nee</span> <span class="tok flag-3">loosu</span> <span class="tok flag-0">da,</span> <span class="tok flag-0">adhukulam</span> <span class="tok flag-0">poitu</span> <span class="tok flag-0">feel</span> <span class="tok flag-0">pandra</span>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Target</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">None</span><div class="sev-track"><div class="sev-fill" style="width:8%; background:var(--sage);"></div></div><span class="sev-pct">8%</span></div>
+            <div class="sev-row"><span class="sev-name">Individual</span><div class="sev-track"><div class="sev-fill" style="width:84%; background:var(--ochre);"></div></div><span class="sev-pct">84%</span></div>
+            <div class="sev-row"><span class="sev-name">Group / caste / region</span><div class="sev-track"><div class="sev-fill" style="width:8%; background:var(--rose);"></div></div><span class="sev-pct">8%</span></div>
+          </div>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Severity</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">Mild</span><div class="sev-track"><div class="sev-fill" style="width:81%; background:var(--sage);"></div></div><span class="sev-pct">81%</span></div>
+            <div class="sev-row"><span class="sev-name">Moderate</span><div class="sev-track"><div class="sev-fill" style="width:15%; background:var(--ochre);"></div></div><span class="sev-pct">15%</span></div>
+            <div class="sev-row"><span class="sev-name">Severe</span><div class="sev-track"><div class="sev-fill" style="width:4%; background:var(--rose);"></div></div><span class="sev-pct">4%</span></div>
+          </div>
+        </div>
+        <div class="verdict-line">Low severity, individual target — rough language between friends, checking in on overthinking.</div>
+        <div class="tone-tag">Tone signal (unconfirmed without thread context): playful / reassuring</div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-label"><span>Example 3 · appearance-based mockery</span><span class="badge">static preview</span></div>
+        <div class="annotated-text">
+          <span class="tok flag-1">Unoda</span> <span class="tok flag-1">moonjuku</span> <span class="tok flag-1">love</span> <span class="tok flag-1">onu</span> <span class="tok flag-1">than</span> <span class="tok flag-1">kedu</span>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Target</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">None</span><div class="sev-track"><div class="sev-fill" style="width:5%; background:var(--sage);"></div></div><span class="sev-pct">5%</span></div>
+            <div class="sev-row"><span class="sev-name">Individual</span><div class="sev-track"><div class="sev-fill" style="width:89%; background:var(--ochre);"></div></div><span class="sev-pct">89%</span></div>
+            <div class="sev-row"><span class="sev-name">Group / caste / region</span><div class="sev-track"><div class="sev-fill" style="width:6%; background:var(--rose);"></div></div><span class="sev-pct">6%</span></div>
+          </div>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Severity</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">Mild</span><div class="sev-track"><div class="sev-fill" style="width:12%; background:var(--sage);"></div></div><span class="sev-pct">12%</span></div>
+            <div class="sev-row"><span class="sev-name">Moderate</span><div class="sev-track"><div class="sev-fill" style="width:71%; background:var(--ochre);"></div></div><span class="sev-pct">71%</span></div>
+            <div class="sev-row"><span class="sev-name">Severe</span><div class="sev-track"><div class="sev-fill" style="width:17%; background:var(--rose);"></div></div><span class="sev-pct">17%</span></div>
+          </div>
+        </div>
+        <div class="verdict-line">Moderate severity, individual target — mockery of physical appearance aimed at a specific person.</div>
+      </div>
+
+      <div class="demo-card">
+        <div class="demo-label"><span>Example 4 · political criticism, no individual target</span><span class="badge">static preview</span></div>
+        <div class="annotated-text">
+          <span class="tok flag-0">Indha</span> <span class="tok flag-3">minister</span> <span class="tok flag-3">oda</span> <span class="tok flag-3">promises</span> <span class="tok flag-3">lam</span> <span class="tok flag-3">kadai</span> <span class="tok flag-3">pidika</span> <span class="tok flag-3">mataru</span>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Target</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">None</span><div class="sev-track"><div class="sev-fill" style="width:72%; background:var(--sage);"></div></div><span class="sev-pct">72%</span></div>
+            <div class="sev-row"><span class="sev-name">Individual</span><div class="sev-track"><div class="sev-fill" style="width:9%; background:var(--ochre);"></div></div><span class="sev-pct">9%</span></div>
+            <div class="sev-row"><span class="sev-name">Group / caste / region</span><div class="sev-track"><div class="sev-fill" style="width:19%; background:var(--rose);"></div></div><span class="sev-pct">19%</span></div>
+          </div>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Severity</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">Mild</span><div class="sev-track"><div class="sev-fill" style="width:68%; background:var(--sage);"></div></div><span class="sev-pct">68%</span></div>
+            <div class="sev-row"><span class="sev-name">Moderate</span><div class="sev-track"><div class="sev-fill" style="width:26%; background:var(--ochre);"></div></div><span class="sev-pct">26%</span></div>
+            <div class="sev-row"><span class="sev-name">Severe</span><div class="sev-track"><div class="sev-fill" style="width:6%; background:var(--rose);"></div></div><span class="sev-pct">6%</span></div>
+          </div>
+        </div>
+        <div class="verdict-line">Low severity, no individual target — criticism aimed at a public figure's track record, not a private person.</div>
+        <div class="tone-tag">Tone signal (unconfirmed without thread context): dry / ironic</div>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">The gap</div>
+      <h2>Generic moderation tools weren't built for this register.</h2>
+      <p class="section-body">Tanglish carries cultural weight that transliteration alone erases. Existing benchmarks label content offensive or not, and by target type, but stop short of grading severity — collapsing a caste-based threat and a mildly rude joke into the same bucket.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-cell">
+        <h3>Binary labels hide the real signal</h3>
+        <p>Offensive / not-offensive tells a moderator nothing about who is targeted or how severe the harm is.</p>
+      </div>
+      <div class="problem-cell">
+        <h3>Target and severity get conflated</h3>
+        <p>Treating "who it's aimed at" and "how harmful it is" as one label loses the distinction a moderator actually needs to act on.</p>
+      </div>
+      <div class="problem-cell">
+        <h3>Tone is context-dependent, not fixed</h3>
+        <p>Sarcasm and banter can't be reliably classified from a single isolated comment — claiming otherwise overstates what any model can do without conversation context.</p>
+      </div>
+      <div class="problem-cell">
+        <h3>No explanation, no accountability</h3>
+        <p>A single label with no reasoning gives platforms and users no way to contest or understand a decision.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="flow">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">How we'll build it</div>
+      <h2>From raw Tanglish text to two independent, explainable scores.</h2>
+      <p class="section-body">Built on the Tamil-English subset of DravidianCodeMix (the HASOC 2021 shared-task data), fine-tuning MuRIL — a transformer pretrained on transliterated Indian-language text.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <h3>Bootstrap target labels</h3>
+        <p>Curated seed-term lists (caste, regional, appearance-based language) weakly label the target axis, then a hand-checked sample is used to measure how reliable those weak labels actually are.</p>
+      </div>
+      <div class="flow-connector">→</div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <h3>Fine-tune on two axes</h3>
+        <p>MuRIL is fine-tuned with two separate classification heads — Target and Severity — so the model isn't forced to learn one conflated label.</p>
+      </div>
+      <div class="flow-connector">→</div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <h3>Score independently</h3>
+        <p>Each input receives a distribution across both axes at once, rather than a single winner-take-all tag.</p>
+      </div>
+      <div class="flow-connector">→</div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <h3>Show the reasoning</h3>
+        <p>Token-level highlighting explains each axis score, and a separate tone signal (e.g. sarcasm, banter) is surfaced as supporting context — not a formal prediction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="deliverables">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Deliverables</div>
+      <h2>What Round 2 ships with.</h2>
+      <p class="section-body">A working, judgeable system — not a slide deck.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-cell">
+        <h3>Fine-tuned two-axis model</h3>
+        <p>MuRIL fine-tuned on DravidianCodeMix Tamil-English data, producing independent Target (none / individual / group) and Severity (mild / moderate / severe) distributions per input.</p>
+      </div>
+      <div class="problem-cell">
+        <h3>Interactive web demo</h3>
+        <p>Text-input interface returning live scores on both axes, tested against inputs judges type themselves — not a fixed script.</p>
+      </div>
+      <div class="problem-cell">
+        <h3>Explainability output</h3>
+        <p>Per-prediction token highlighting for each axis, plus a separate tone signal for sarcasm/banter shown as supporting context.</p>
+      </div>
+      <div class="problem-cell">
+        <h3>Evaluation report</h3>
+        <p>Precision, recall, and F1 per axis on a held-out test split, plus the hand-checked agreement rate for the weakly-labeled target data.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="categories">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Classification framework</div>
+      <h2>Two dimensions, not one flat label.</h2>
+      <p class="section-body">Who a message targets and how severe it is are different questions. Scoring them independently keeps a caste-based threat from being conflated with a mildly rude joke, and lets moderators prioritize by actual harm.</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card c1">
+        <h4>Target · None</h4>
+        <p>No individual or group is targeted — general commentary, criticism of ideas or institutions.</p>
+      </div>
+      <div class="cat-card c2">
+        <h4>Target · Individual</h4>
+        <p>Directed at a specific person, whether affectionate banter or a personal attack.</p>
+      </div>
+      <div class="cat-card c3">
+        <h4>Target · Group / caste / region</h4>
+        <p>Directed at an identity group — caste, regional, or community-based language.</p>
+      </div>
+      <div class="cat-card c4">
+        <h4>Severity · Mild</h4>
+        <p>Low-harm language — teasing, sarcasm, or light criticism with no real intent to harm.</p>
+      </div>
+      <div class="cat-card c5">
+        <h4>Severity · Moderate</h4>
+        <p>Clearly insulting or demeaning language without an explicit threat.</p>
+      </div>
+      <div class="cat-card c6">
+        <h4>Severity · Severe</h4>
+        <p>Threatening, dehumanizing, or identity-based language causing serious harm.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="border-bottom:none;">
+  <div class="wrap">
+    <div class="notice">
+      <div class="notice-dot"></div>
+      <div>
+        <strong style="color:var(--ink);">This is a static Round 1 prototype.</strong> The annotated examples above use fixed inputs to illustrate intended output. The full system — training, scoring, and explainability — will be built and connected live during the Round 2 build window.
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  TanShield — Next-Gen Tamil Language &amp; Cultural AI · Hackathon Prototype
+</footer>
+
+</body>
+</html>
