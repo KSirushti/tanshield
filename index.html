@@ -27,7 +27,7 @@
   <div class="wrap">
     <div class="eyebrow">Prototype — Round 1 Submission</div>
     <h1>Toxicity detection that reads Tanglish like a <em>native speaker</em>, not a translator.</h1>
-    <p class="hero-sub">TanShield scores Tamil-English code-mixed text along two independent dimensions — who it targets, and how severe it is — instead of forcing every message into one flat offensive/not-offensive label.</p>
+    <p class="hero-sub">TanShield is a multi-task classification framework that scores Tamil-English code-mixed text through two independent prediction heads — Target and Severity — instead of forcing every message into one flat offensive/not-offensive label.</p>
 
     <div class="demo-stack" id="demo">
 
@@ -150,8 +150,8 @@
         <p>Treating "who it's aimed at" and "how harmful it is" as one label loses the distinction a moderator actually needs to act on.</p>
       </div>
       <div class="problem-cell">
-        <h3>Tone is context-dependent, not fixed</h3>
-        <p>Sarcasm and banter can't be reliably classified from a single isolated comment — claiming otherwise overstates what any model can do without conversation context.</p>
+        <h3>Keyword presence isn't proof of target</h3>
+        <p>A caste term in "government should end caste discrimination" isn't caste-targeted harassment — lexicons alone can't tell the difference.</p>
       </div>
       <div class="problem-cell">
         <h3>No explanation, no accountability</h3>
@@ -165,32 +165,46 @@
   <div class="wrap">
     <div class="section-head">
       <div class="section-eyebrow">How we'll build it</div>
-      <h2>From raw Tanglish text to two independent, explainable scores.</h2>
+      <h2>From candidate signals to validated, multi-task predictions.</h2>
       <p class="section-body">Built on the Tamil-English subset of DravidianCodeMix (the HASOC 2021 shared-task data), fine-tuning MuRIL — a transformer pretrained on transliterated Indian-language text.</p>
     </div>
+
+    <div class="notice" style="margin-bottom:32px;">
+      <div class="notice-dot"></div>
+      <div>
+        <strong style="color:var(--ink);">Lexical trigger ≠ semantic label.</strong> A caste term appearing in a sentence doesn't mean that sentence is caste-targeted — "government should end caste discrimination" contains caste vocabulary without being an attack. Seed lexicons only produce <em>candidate</em> labels for both Target and Severity; every candidate is validated against human judgment before it becomes a training label.
+      </div>
+    </div>
+
     <div class="flow">
       <div class="flow-step">
         <div class="flow-num">1</div>
-        <h3>Bootstrap target labels</h3>
-        <p>Curated seed-term lists (caste, regional, appearance-based language) weakly label the target axis, then a hand-checked sample is used to measure how reliable those weak labels actually are.</p>
+        <h3>Seed lexicon candidates</h3>
+        <p>Target candidates come from caste/regional/appearance term lists. Severity candidates come from a separate lexicon of threat-intensity language (severe), insult/profanity terms (moderate), and teasing/sarcasm markers (mild).</p>
       </div>
       <div class="flow-connector">→</div>
       <div class="flow-step">
         <div class="flow-num">2</div>
-        <h3>Fine-tune on two axes</h3>
-        <p>MuRIL is fine-tuned with two separate classification heads — Target and Severity — so the model isn't forced to learn one conflated label.</p>
+        <h3>Human validation</h3>
+        <p>A hand-annotated subset (minimum 300–500 comments) is scored against both sets of weak labels. Agreement is reported as Cohen's κ plus per-class precision/recall — a number, not a claim.</p>
       </div>
       <div class="flow-connector">→</div>
       <div class="flow-step">
         <div class="flow-num">3</div>
-        <h3>Score independently</h3>
-        <p>Each input receives a distribution across both axes at once, rather than a single winner-take-all tag.</p>
+        <h3>Multi-task fine-tuning</h3>
+        <p>MuRIL is fine-tuned with two independent heads on the validated labels, so the model learns contextual patterns rather than memorizing keyword presence.</p>
       </div>
       <div class="flow-connector">→</div>
       <div class="flow-step">
         <div class="flow-num">4</div>
+        <h3>Score both heads</h3>
+        <p>Each input receives a distribution across Target and Severity independently, generalizing beyond the seed lexicon at inference time.</p>
+      </div>
+      <div class="flow-connector">→</div>
+      <div class="flow-step">
+        <div class="flow-num">5</div>
         <h3>Show the reasoning</h3>
-        <p>Token-level highlighting explains each axis score, and a separate tone signal (e.g. sarcasm, banter) is surfaced as supporting context — not a formal prediction.</p>
+        <p>Token-level highlighting explains each head's score. A separate tone signal (sarcasm, banter) is surfaced as unconfirmed context, not a formal prediction.</p>
       </div>
     </div>
   </div>
@@ -206,7 +220,7 @@
     <div class="problem-grid">
       <div class="problem-cell">
         <h3>Fine-tuned two-axis model</h3>
-        <p>MuRIL fine-tuned on DravidianCodeMix Tamil-English data, producing independent Target (none / individual / group) and Severity (mild / moderate / severe) distributions per input.</p>
+        <p>MuRIL fine-tuned with independent Target and Severity heads on human-validated labels, not raw keyword matches.</p>
       </div>
       <div class="problem-cell">
         <h3>Interactive web demo</h3>
@@ -218,7 +232,7 @@
       </div>
       <div class="problem-cell">
         <h3>Evaluation report</h3>
-        <p>Precision, recall, and F1 per axis on a held-out test split, plus the hand-checked agreement rate for the weakly-labeled target data.</p>
+        <p>Precision, recall, and F1 per class on a held-out test split for both heads, plus Cohen's κ and precision/recall of the weak labels against the hand-annotated validation subset.</p>
       </div>
     </div>
   </div>
@@ -228,8 +242,8 @@
   <div class="wrap">
     <div class="section-head">
       <div class="section-eyebrow">Classification framework</div>
-      <h2>Two dimensions, not one flat label.</h2>
-      <p class="section-body">Who a message targets and how severe it is are different questions. Scoring them independently keeps a caste-based threat from being conflated with a mildly rude joke, and lets moderators prioritize by actual harm.</p>
+      <h2>A multi-task framework, not one flat label.</h2>
+      <p class="section-body">Target and Severity are predicted by two independent classification heads on the same fine-tuned model — a caste-based threat and a mildly rude joke can't collapse into the same bucket.</p>
     </div>
     <div class="cat-grid">
       <div class="cat-card c1">
