@@ -27,7 +27,7 @@
   <div class="wrap">
     <div class="eyebrow">Prototype — Round 1 Submission</div>
     <h1>Toxicity detection that reads Tanglish like a <em>native speaker</em>, not a translator.</h1>
-    <p class="hero-sub">TanShield is a multi-task classification framework that scores Tamil-English code-mixed text through two independent prediction heads — Target and Severity — instead of forcing every message into one flat offensive/not-offensive label.</p>
+    <p class="hero-sub">TanShield is a multi-task classification framework that scores Tamil-English code-mixed text through three independent prediction heads — Content Type, Target, and Severity — directly detecting hate speech, harassment, toxic language, and cultural sarcasm, instead of one flat offensive/not-offensive label.</p>
 
     <div class="demo-stack" id="demo">
 
@@ -35,6 +35,16 @@
         <div class="demo-label"><span>Example 1 · caste-based threat</span><span class="badge">static preview</span></div>
         <div class="annotated-text">
           <span class="tok flag-2">Unoda</span> <span class="tok flag-2">jaathi</span> <span class="tok flag-0">una</span> <span class="tok flag-2">yenga</span> <span class="tok flag-2">kapathuthu</span> <span class="tok flag-0">nu</span> <span class="tok flag-0">papom</span>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Content type</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">Hate speech</span><div class="sev-track"><div class="sev-fill" style="width:68%; background:var(--maroon);"></div></div><span class="sev-pct">68%</span></div>
+            <div class="sev-row"><span class="sev-name">Harassment</span><div class="sev-track"><div class="sev-fill" style="width:24%; background:var(--rose);"></div></div><span class="sev-pct">24%</span></div>
+            <div class="sev-row"><span class="sev-name">Toxic / profane</span><div class="sev-track"><div class="sev-fill" style="width:5%; background:var(--ochre);"></div></div><span class="sev-pct">5%</span></div>
+            <div class="sev-row"><span class="sev-name">Cultural sarcasm</span><div class="sev-track"><div class="sev-fill" style="width:1%; background:var(--indigo);"></div></div><span class="sev-pct">1%</span></div>
+            <div class="sev-row"><span class="sev-name">Non-offensive</span><div class="sev-track"><div class="sev-fill" style="width:2%; background:var(--sage);"></div></div><span class="sev-pct">2%</span></div>
+          </div>
         </div>
         <div class="axis-block">
           <div class="axis-label">Target</div>
@@ -52,13 +62,23 @@
             <div class="sev-row"><span class="sev-name">Severe</span><div class="sev-track"><div class="sev-fill" style="width:88%; background:var(--rose);"></div></div><span class="sev-pct">88%</span></div>
           </div>
         </div>
-        <div class="verdict-line">High severity, group-targeted — caste identity invoked as intimidation ("let's see who protects you"), not commentary.</div>
+        <div class="verdict-line">Classified as <strong>hate speech</strong>, group-targeted, severe — caste identity invoked as intimidation ("let's see who protects you"), not commentary.</div>
       </div>
 
       <div class="demo-card">
         <div class="demo-label"><span>Example 2 · friend checking in, rough language</span><span class="badge">static preview</span></div>
         <div class="annotated-text">
           <span class="tok flag-0">Macha</span> <span class="tok flag-3">nee</span> <span class="tok flag-3">loosu</span> <span class="tok flag-0">da,</span> <span class="tok flag-0">adhukulam</span> <span class="tok flag-0">poitu</span> <span class="tok flag-0">feel</span> <span class="tok flag-0">pandra</span>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Content type</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">Hate speech</span><div class="sev-track"><div class="sev-fill" style="width:1%; background:var(--maroon);"></div></div><span class="sev-pct">1%</span></div>
+            <div class="sev-row"><span class="sev-name">Harassment</span><div class="sev-track"><div class="sev-fill" style="width:3%; background:var(--rose);"></div></div><span class="sev-pct">3%</span></div>
+            <div class="sev-row"><span class="sev-name">Toxic / profane</span><div class="sev-track"><div class="sev-fill" style="width:5%; background:var(--ochre);"></div></div><span class="sev-pct">5%</span></div>
+            <div class="sev-row"><span class="sev-name">Cultural sarcasm</span><div class="sev-track"><div class="sev-fill" style="width:20%; background:var(--indigo);"></div></div><span class="sev-pct">20%</span></div>
+            <div class="sev-row"><span class="sev-name">Non-offensive</span><div class="sev-track"><div class="sev-fill" style="width:71%; background:var(--sage);"></div></div><span class="sev-pct">71%</span></div>
+          </div>
         </div>
         <div class="axis-block">
           <div class="axis-label">Target</div>
@@ -76,14 +96,24 @@
             <div class="sev-row"><span class="sev-name">Severe</span><div class="sev-track"><div class="sev-fill" style="width:4%; background:var(--rose);"></div></div><span class="sev-pct">4%</span></div>
           </div>
         </div>
-        <div class="verdict-line">Low severity, individual target — rough language between friends, checking in on overthinking.</div>
-        <div class="tone-tag">Tone signal (unconfirmed without thread context): playful / reassuring</div>
+        <div class="verdict-line">Classified as <strong>non-offensive</strong> with secondary <strong>cultural sarcasm</strong> signal — "loosu" here is a friend gently calling out overthinking.</div>
+        <div class="tone-tag">Sarcasm confidence is lower without thread context — shown, not hidden.</div>
       </div>
 
       <div class="demo-card">
         <div class="demo-label"><span>Example 3 · appearance-based mockery</span><span class="badge">static preview</span></div>
         <div class="annotated-text">
           <span class="tok flag-1">Unoda</span> <span class="tok flag-1">moonjuku</span> <span class="tok flag-1">love</span> <span class="tok flag-1">onu</span> <span class="tok flag-1">than</span> <span class="tok flag-1">kedu</span>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Content type</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">Hate speech</span><div class="sev-track"><div class="sev-fill" style="width:3%; background:var(--maroon);"></div></div><span class="sev-pct">3%</span></div>
+            <div class="sev-row"><span class="sev-name">Harassment</span><div class="sev-track"><div class="sev-fill" style="width:78%; background:var(--rose);"></div></div><span class="sev-pct">78%</span></div>
+            <div class="sev-row"><span class="sev-name">Toxic / profane</span><div class="sev-track"><div class="sev-fill" style="width:12%; background:var(--ochre);"></div></div><span class="sev-pct">12%</span></div>
+            <div class="sev-row"><span class="sev-name">Cultural sarcasm</span><div class="sev-track"><div class="sev-fill" style="width:3%; background:var(--indigo);"></div></div><span class="sev-pct">3%</span></div>
+            <div class="sev-row"><span class="sev-name">Non-offensive</span><div class="sev-track"><div class="sev-fill" style="width:4%; background:var(--sage);"></div></div><span class="sev-pct">4%</span></div>
+          </div>
         </div>
         <div class="axis-block">
           <div class="axis-label">Target</div>
@@ -101,13 +131,23 @@
             <div class="sev-row"><span class="sev-name">Severe</span><div class="sev-track"><div class="sev-fill" style="width:17%; background:var(--rose);"></div></div><span class="sev-pct">17%</span></div>
           </div>
         </div>
-        <div class="verdict-line">Moderate severity, individual target — mockery of physical appearance aimed at a specific person.</div>
+        <div class="verdict-line">Classified as <strong>harassment</strong>, individual target, moderate severity — mockery of physical appearance aimed at a specific person.</div>
       </div>
 
       <div class="demo-card">
         <div class="demo-label"><span>Example 4 · political criticism, no individual target</span><span class="badge">static preview</span></div>
         <div class="annotated-text">
           <span class="tok flag-0">Indha</span> <span class="tok flag-3">minister</span> <span class="tok flag-3">oda</span> <span class="tok flag-3">promises</span> <span class="tok flag-3">lam</span> <span class="tok flag-3">kadai</span> <span class="tok flag-3">pidika</span> <span class="tok flag-3">mataru</span>
+        </div>
+        <div class="axis-block">
+          <div class="axis-label">Content type</div>
+          <div class="severity-rows">
+            <div class="sev-row"><span class="sev-name">Hate speech</span><div class="sev-track"><div class="sev-fill" style="width:1%; background:var(--maroon);"></div></div><span class="sev-pct">1%</span></div>
+            <div class="sev-row"><span class="sev-name">Harassment</span><div class="sev-track"><div class="sev-fill" style="width:4%; background:var(--rose);"></div></div><span class="sev-pct">4%</span></div>
+            <div class="sev-row"><span class="sev-name">Toxic / profane</span><div class="sev-track"><div class="sev-fill" style="width:5%; background:var(--ochre);"></div></div><span class="sev-pct">5%</span></div>
+            <div class="sev-row"><span class="sev-name">Cultural sarcasm</span><div class="sev-track"><div class="sev-fill" style="width:32%; background:var(--indigo);"></div></div><span class="sev-pct">32%</span></div>
+            <div class="sev-row"><span class="sev-name">Non-offensive</span><div class="sev-track"><div class="sev-fill" style="width:58%; background:var(--sage);"></div></div><span class="sev-pct">58%</span></div>
+          </div>
         </div>
         <div class="axis-block">
           <div class="axis-label">Target</div>
@@ -125,8 +165,8 @@
             <div class="sev-row"><span class="sev-name">Severe</span><div class="sev-track"><div class="sev-fill" style="width:6%; background:var(--rose);"></div></div><span class="sev-pct">6%</span></div>
           </div>
         </div>
-        <div class="verdict-line">Low severity, no individual target — criticism aimed at a public figure's track record, not a private person.</div>
-        <div class="tone-tag">Tone signal (unconfirmed without thread context): dry / ironic</div>
+        <div class="verdict-line">Classified as <strong>non-offensive</strong> with secondary <strong>cultural sarcasm</strong> — criticism of a minister's track record, not a private individual.</div>
+        <div class="tone-tag">Sarcasm confidence is lower without thread context — shown, not hidden.</div>
       </div>
 
     </div>
@@ -138,7 +178,7 @@
     <div class="section-head">
       <div class="section-eyebrow">The gap</div>
       <h2>Generic moderation tools weren't built for this register.</h2>
-      <p class="section-body">Tanglish carries cultural weight that transliteration alone erases. Existing benchmarks label content offensive or not, and by target type, but stop short of grading severity — collapsing a caste-based threat and a mildly rude joke into the same bucket.</p>
+      <p class="section-body">Tanglish carries cultural weight that transliteration alone erases. Existing benchmarks label content offensive or not, but stop short of separating what kind of harm it is, who it targets, and how severe it is — collapsing cultural sarcasm, hate speech, and a mildly rude joke into the same bucket.</p>
     </div>
     <div class="problem-grid">
       <div class="problem-cell">
@@ -172,7 +212,7 @@
     <div class="notice" style="margin-bottom:32px;">
       <div class="notice-dot"></div>
       <div>
-        <strong style="color:var(--ink);">Lexical trigger ≠ semantic label.</strong> A caste term appearing in a sentence doesn't mean that sentence is caste-targeted — "government should end caste discrimination" contains caste vocabulary without being an attack. Seed lexicons only produce <em>candidate</em> labels for both Target and Severity; every candidate is validated against human judgment before it becomes a training label.
+        <strong style="color:var(--ink);">Lexical trigger ≠ semantic label.</strong> A caste term appearing in a sentence doesn't mean that sentence is caste-targeted — "government should end caste discrimination" contains caste vocabulary without being an attack. Seed lexicons only produce <em>candidate</em> labels for Content Type, Target, and Severity; every candidate is validated against human judgment before it becomes a training label.
       </div>
     </div>
 
@@ -180,7 +220,7 @@
       <div class="flow-step">
         <div class="flow-num">1</div>
         <h3>Seed lexicon candidates</h3>
-        <p>Target candidates come from caste/regional/appearance term lists. Severity candidates come from a separate lexicon of threat-intensity language (severe), insult/profanity terms (moderate), and teasing/sarcasm markers (mild).</p>
+        <p>Content Type candidates come from toxicity/hate/profanity term lists. Target candidates come from caste/regional/appearance term lists. Severity candidates come from threat-intensity, insult, and teasing markers.</p>
       </div>
       <div class="flow-step">
         <div class="flow-num">2</div>
@@ -190,17 +230,17 @@
       <div class="flow-step">
         <div class="flow-num">3</div>
         <h3>Multi-task fine-tuning</h3>
-        <p>MuRIL is fine-tuned with two independent heads on the validated labels, so the model learns contextual patterns rather than memorizing keyword presence.</p>
+        <p>MuRIL is fine-tuned with three independent heads — Content Type, Target, Severity — on the validated labels, so the model learns contextual patterns rather than memorizing keyword presence.</p>
       </div>
       <div class="flow-step">
         <div class="flow-num">4</div>
         <h3>Score both heads</h3>
-        <p>Each input receives a distribution across Target and Severity independently, generalizing beyond the seed lexicon at inference time.</p>
+        <p>Each input receives a distribution across all three heads at once, generalizing beyond the seed lexicon at inference time.</p>
       </div>
       <div class="flow-step">
         <div class="flow-num">5</div>
         <h3>Show the reasoning</h3>
-        <p>Token-level highlighting explains each head's score. A separate tone signal (sarcasm, banter) is surfaced as unconfirmed context, not a formal prediction.</p>
+        <p>Token-level highlighting explains each head's score, including why a message was called cultural sarcasm rather than a bare label.</p>
       </div>
     </div>
   </div>
@@ -215,8 +255,8 @@
     </div>
     <div class="problem-grid">
       <div class="problem-cell">
-        <h3>Fine-tuned two-axis model</h3>
-        <p>MuRIL fine-tuned with independent Target and Severity heads on human-validated labels, not raw keyword matches.</p>
+        <h3>Fine-tuned three-head model</h3>
+        <p>MuRIL fine-tuned with independent Content Type, Target, and Severity heads on human-validated labels, not raw keyword matches.</p>
       </div>
       <div class="problem-cell">
         <h3>Interactive web demo</h3>
@@ -228,7 +268,7 @@
       </div>
       <div class="problem-cell">
         <h3>Evaluation report</h3>
-        <p>Precision, recall, and F1 per class on a held-out test split for both heads, plus Cohen's κ and precision/recall of the weak labels against the hand-annotated validation subset.</p>
+        <p>Precision, recall, and F1 per class on a held-out test split for all three heads, plus Cohen's κ and precision/recall of the weak labels against the hand-annotated validation subset.</p>
       </div>
     </div>
   </div>
@@ -238,10 +278,30 @@
   <div class="wrap">
     <div class="section-head">
       <div class="section-eyebrow">Classification framework</div>
-      <h2>A multi-task framework, not one flat label.</h2>
-      <p class="section-body">Target and Severity are predicted by two independent classification heads on the same fine-tuned model — a caste-based threat and a mildly rude joke can't collapse into the same bucket.</p>
+      <h2>Three heads, not one flat label.</h2>
+      <p class="section-body">Content Type answers what kind of harm it is — restoring cultural sarcasm as a real predicted class. Target and Severity add the prioritization layer moderators need on top of it.</p>
     </div>
     <div class="cat-grid">
+      <div class="cat-card c6">
+        <h4>Content · Hate speech</h4>
+        <p>Identity-based attacks — caste, religion, region — used to demean or threaten.</p>
+      </div>
+      <div class="cat-card c3">
+        <h4>Content · Harassment</h4>
+        <p>Targeted, demeaning language aimed at a specific individual.</p>
+      </div>
+      <div class="cat-card c2">
+        <h4>Content · Toxic / profane</h4>
+        <p>Generic abusive or profane language without a clear identity or individual target.</p>
+      </div>
+      <div class="cat-card c4">
+        <h4>Content · Cultural sarcasm</h4>
+        <p>Irony or sarcasm rooted in Tamil cultural context — flagged with confidence, not asserted.</p>
+      </div>
+      <div class="cat-card c1">
+        <h4>Content · Non-offensive</h4>
+        <p>No toxicity, harassment, or hate signal detected.</p>
+      </div>
       <div class="cat-card c1">
         <h4>Target · None</h4>
         <p>No individual or group is targeted — general commentary, criticism of ideas or institutions.</p>
