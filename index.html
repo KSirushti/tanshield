@@ -281,51 +281,70 @@
       <h2>Three heads, not one flat label.</h2>
       <p class="section-body">Content Type answers what kind of harm it is — restoring cultural sarcasm as a real predicted class. Target and Severity add the prioritization layer moderators need on top of it.</p>
     </div>
-    <div class="cat-grid">
-      <div class="cat-card c6">
-        <h4>Content · Hate speech</h4>
-        <p>Identity-based attacks — caste, religion, region — used to demean or threaten.</p>
+    <div class="axis-groups">
+
+      <div class="axis-group content">
+        <div class="axis-group-header"><span class="axis-group-dot"></span>Content type<span class="count">5 classes</span></div>
+        <div class="axis-group-cards">
+          <div class="cat-card c6">
+            <h4>Hate speech</h4>
+            <p>Identity-based attacks — caste, religion, region — used to demean or threaten.</p>
+          </div>
+          <div class="cat-card c3">
+            <h4>Harassment</h4>
+            <p>Targeted, demeaning language aimed at a specific individual.</p>
+          </div>
+          <div class="cat-card c2">
+            <h4>Toxic / profane</h4>
+            <p>Generic abusive or profane language without a clear identity or individual target.</p>
+          </div>
+          <div class="cat-card c4">
+            <h4>Cultural sarcasm</h4>
+            <p>Irony or sarcasm rooted in Tamil cultural context — flagged with confidence, not asserted.</p>
+          </div>
+          <div class="cat-card c1">
+            <h4>Non-offensive</h4>
+            <p>No toxicity, harassment, or hate signal detected.</p>
+          </div>
+        </div>
       </div>
-      <div class="cat-card c3">
-        <h4>Content · Harassment</h4>
-        <p>Targeted, demeaning language aimed at a specific individual.</p>
+
+      <div class="axis-group target">
+        <div class="axis-group-header"><span class="axis-group-dot"></span>Target<span class="count">3 classes</span></div>
+        <div class="axis-group-cards">
+          <div class="cat-card c1">
+            <h4>None</h4>
+            <p>No individual or group is targeted — general commentary, criticism of ideas or institutions.</p>
+          </div>
+          <div class="cat-card c2">
+            <h4>Individual</h4>
+            <p>Directed at a specific person, whether affectionate banter or a personal attack.</p>
+          </div>
+          <div class="cat-card c3">
+            <h4>Group / caste / region</h4>
+            <p>Directed at an identity group — caste, regional, or community-based language.</p>
+          </div>
+        </div>
       </div>
-      <div class="cat-card c2">
-        <h4>Content · Toxic / profane</h4>
-        <p>Generic abusive or profane language without a clear identity or individual target.</p>
+
+      <div class="axis-group severity">
+        <div class="axis-group-header"><span class="axis-group-dot"></span>Severity<span class="count">3 classes</span></div>
+        <div class="axis-group-cards">
+          <div class="cat-card c4">
+            <h4>Mild</h4>
+            <p>Low-harm language — teasing, sarcasm, or light criticism with no real intent to harm.</p>
+          </div>
+          <div class="cat-card c5">
+            <h4>Moderate</h4>
+            <p>Clearly insulting or demeaning language without an explicit threat.</p>
+          </div>
+          <div class="cat-card c6">
+            <h4>Severe</h4>
+            <p>Threatening, dehumanizing, or identity-based language causing serious harm.</p>
+          </div>
+        </div>
       </div>
-      <div class="cat-card c4">
-        <h4>Content · Cultural sarcasm</h4>
-        <p>Irony or sarcasm rooted in Tamil cultural context — flagged with confidence, not asserted.</p>
-      </div>
-      <div class="cat-card c1">
-        <h4>Content · Non-offensive</h4>
-        <p>No toxicity, harassment, or hate signal detected.</p>
-      </div>
-      <div class="cat-card c1">
-        <h4>Target · None</h4>
-        <p>No individual or group is targeted — general commentary, criticism of ideas or institutions.</p>
-      </div>
-      <div class="cat-card c2">
-        <h4>Target · Individual</h4>
-        <p>Directed at a specific person, whether affectionate banter or a personal attack.</p>
-      </div>
-      <div class="cat-card c3">
-        <h4>Target · Group / caste / region</h4>
-        <p>Directed at an identity group — caste, regional, or community-based language.</p>
-      </div>
-      <div class="cat-card c4">
-        <h4>Severity · Mild</h4>
-        <p>Low-harm language — teasing, sarcasm, or light criticism with no real intent to harm.</p>
-      </div>
-      <div class="cat-card c5">
-        <h4>Severity · Moderate</h4>
-        <p>Clearly insulting or demeaning language without an explicit threat.</p>
-      </div>
-      <div class="cat-card c6">
-        <h4>Severity · Severe</h4>
-        <p>Threatening, dehumanizing, or identity-based language causing serious harm.</p>
-      </div>
+
     </div>
   </div>
 </section>
