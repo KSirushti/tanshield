@@ -182,25 +182,21 @@
         <h3>Seed lexicon candidates</h3>
         <p>Target candidates come from caste/regional/appearance term lists. Severity candidates come from a separate lexicon of threat-intensity language (severe), insult/profanity terms (moderate), and teasing/sarcasm markers (mild).</p>
       </div>
-      <div class="flow-connector">→</div>
       <div class="flow-step">
         <div class="flow-num">2</div>
         <h3>Human validation</h3>
         <p>A hand-annotated subset (minimum 300–500 comments) is scored against both sets of weak labels. Agreement is reported as Cohen's κ plus per-class precision/recall — a number, not a claim.</p>
       </div>
-      <div class="flow-connector">→</div>
       <div class="flow-step">
         <div class="flow-num">3</div>
         <h3>Multi-task fine-tuning</h3>
         <p>MuRIL is fine-tuned with two independent heads on the validated labels, so the model learns contextual patterns rather than memorizing keyword presence.</p>
       </div>
-      <div class="flow-connector">→</div>
       <div class="flow-step">
         <div class="flow-num">4</div>
         <h3>Score both heads</h3>
         <p>Each input receives a distribution across Target and Severity independently, generalizing beyond the seed lexicon at inference time.</p>
       </div>
-      <div class="flow-connector">→</div>
       <div class="flow-step">
         <div class="flow-num">5</div>
         <h3>Show the reasoning</h3>
@@ -274,6 +270,16 @@
   </div>
 </section>
 
+<section style="border-bottom:none;">
+  <div class="wrap">
+    <div class="notice">
+      <div class="notice-dot"></div>
+      <div>
+        <strong style="color:var(--ink);">This is a static Round 1 prototype.</strong> The annotated examples above use fixed inputs to illustrate intended output. The full system — training, scoring, and explainability — will be built and connected live during the Round 2 build window.
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer>
   TanShield — Next-Gen Tamil Language &amp; Cultural AI · Hackathon Prototype
